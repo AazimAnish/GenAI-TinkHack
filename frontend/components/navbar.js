@@ -6,12 +6,11 @@ import Image from "next/image"
 import { Disclosure } from "@headlessui/react";
 
 import Logo from "../public/cash-flow.png"
-import Dashboard from "../src/app/Dashboard/page";
 
 const Navbar = () => {
   const navigation = [
     <Link href="../Dashboard">Dashboard</Link>,
-    "Features",
+    <Link href="../BudgetProfile">BProfile</Link>,
     "Pricing",
     "Company",
     "Blog",
