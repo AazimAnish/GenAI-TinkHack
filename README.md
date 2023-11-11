@@ -1,0 +1,2 @@
+# GenAI-TinkHack
+Something funny!
