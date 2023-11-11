@@ -1,4 +1,4 @@
-const db = require('../config/firebase');
+import db from '../config/firebase.js';
 
 const createSubscription = async (req, res) => {
     try {
@@ -75,7 +75,7 @@ const updateSubscription = async (req, res) => {
     }
 };
 
-module.exports = {
+export{
     createSubscription,
     getAllSubscriptions,
     getSubscriptionById,

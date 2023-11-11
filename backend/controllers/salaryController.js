@@ -1,4 +1,4 @@
-const db = require('../config/firebase')
+import db from '../config/firebase.js';
 
 const createSalary = async (req,res) =>{
     try{
@@ -39,7 +39,7 @@ const updateSalary = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     createSalary,
     updateSalary,
 

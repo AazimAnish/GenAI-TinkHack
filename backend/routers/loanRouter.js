@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const loanController = require('../controllers/loanController');
+import * as loanController from '../controllers/loanController.js';
 
 // Create a new loan
 router.post('/create', loanController.createLoan);
@@ -14,4 +14,4 @@ router.get('/all', loanController.getAllLoans);
 // Get a loan by ID
 router.get('/:id', loanController.getLoanById);
 
-module.exports = router;
+export default router;

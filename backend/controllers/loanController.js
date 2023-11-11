@@ -1,5 +1,4 @@
-const db = require('../config/firebase');
-
+import db from '../config/firebase.js';
 
 const createLoan = async (req, res) => {
     try {
@@ -26,7 +25,6 @@ const createLoan = async (req, res) => {
     }
 };
 
-
 const updateLoan = async (req, res) => {
     try {
         const { id, newData } = req.body;
@@ -52,7 +50,6 @@ const updateLoan = async (req, res) => {
     }
 };
 
-
 const getAllLoans = async (req, res) => {
     try {
         const response = await db.collection('loan').get();
@@ -66,7 +63,6 @@ const getAllLoans = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-
 
 const getLoanById = async (req, res) => {
     try {
@@ -85,7 +81,7 @@ const getLoanById = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     createLoan,
     updateLoan,
     getAllLoans,

@@ -1,5 +1,6 @@
-const admin = require('firebase-admin');
-const credentials = require('../key.json');
+import admin from 'firebase-admin';
+import credentials from '../key.json' assert { type: "json" };
+
 
 admin.initializeApp({
     credential: admin.credential.cert(credentials),
@@ -7,4 +8,4 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-module.exports = db;
+export default db;
