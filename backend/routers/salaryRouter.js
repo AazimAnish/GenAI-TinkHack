@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const salaryController = require('../controllers/salaryController');
+import * as salaryController from '../controllers/salaryController.js';
 
-router.post('/create',salaryController.createSalary);
-router.post('/update',salaryController.updateSalary);
+router.post('/create', salaryController.createSalary);
+router.post('/update', salaryController.updateSalary);
 
-module.exports = router
+export default router;
