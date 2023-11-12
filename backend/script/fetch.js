@@ -1,10 +1,12 @@
-import OpenAI from "openai";
-import fs from 'fs'
+// main file (fetch.js)
 
+const OpenAI = require("openai");
+const fs = require('fs');
 
-// Replace 'your_actual_api_key' with your OpenAI API key
-const apiKey = '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';
-const fileContent = fs.readFileSync('./bill.txt', 'utf-8');
+let total, purpose; // Declare variables
+
+const apiKey = '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';
+const fileContent = fs.readFileSync('../bill.txt', 'utf-8');
 
 /**
  * This function generates the total and purpose of a bill from the OpenAI API.
@@ -23,12 +25,7 @@ async function generateBillTotalAndPurpose(billText) {
   // Send the completion request to the OpenAI API.
   try {
     const completion = await openai.completions.create(completionRequest);
-
-    // Get the completion text from the OpenAI response.
     const completionText = completion.choices[0].text;
-
-    // Print completionText for debugging.
-    console.log("Completion Text:", completionText);
 
     // Adjust the regular expression based on the actual response format.
     const regex = /\[([^\]]+)]/; // Example: Match anything between [ and ]
@@ -38,28 +35,37 @@ async function generateBillTotalAndPurpose(billText) {
       throw new Error("Invalid format in completionText");
     }
 
-    console.log("Matched values:", match[1]);
-
     // Extract values using the simplified regular expression.
-    const [total, purpose] = match[1].split(",").map((value) => value.trim());
+    const [parsedTotal, parsedPurpose] = match[1].split(",").map((value) => value.trim());
 
-    return [parseFloat(total), purpose.replace(/"/g, "")];
+    // Assign values to the variables
+    total = parseFloat(parsedTotal);
+    purpose = parsedPurpose.replace(/"/g, "");
   } catch (error) {
     throw new Error(`Error in OpenAI API request: ${error.message}`);
   }
 }
 
-// Example usage:
-const billText = `forget all the bill i send before
-this is a new bill for which I spend money on. 
-${fileContent}
-give me what is the total expense for this bill and what is this bill for, like what did i do with the money like did i use this for like food, grocery or others etc.. NOTE : give me the output in an array format... that is like [total, what is this for] ...ex:[7000, food]
-`;
+// Async function to be called
+async function fetchData() {
+  // Example usage:
+  const billText = `forget all the bill i send before
+  this is a new bill for which I spend money on. 
+  ${fileContent}
+  give me what is the total expense for this bill and what is this bill for, like what did i do with the money like did i use this for like food, grocery or others etc.. NOTE : give me the output in an array format... that is like [total, what is this for] ...ex:[7000, food]
+  `;
 
-try {
-  const [total, purpose] = await generateBillTotalAndPurpose(billText);
-  console.log(`Total: ${total}`);
-  console.log(`Purpose: ${purpose}`);
-} catch (error) {
-  console.error(error.message);
+  try {
+    // Call the function and handle the result accordingly
+    await generateBillTotalAndPurpose(billText);
+    console.log(total, purpose);
+  } catch (error) {
+    console.error(error.message);
+  }
 }
+
+// Call the asynchronous function
+fetchData();
+
+// Export variables directly
+module.exports = { total, purpose };

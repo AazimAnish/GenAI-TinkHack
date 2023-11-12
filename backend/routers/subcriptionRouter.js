@@ -1,6 +1,6 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import * as subscriptionController from '../controllers/subscriptionController.js';
+const subscriptionController = require('../controllers/subscriptionController.js');
 
 // Create a new subscription
 router.post('/create', subscriptionController.createSubscription);
@@ -14,4 +14,4 @@ router.get('/:id', subscriptionController.getSubscriptionById);
 // Update a subscription
 router.put('/subscriptions', subscriptionController.updateSubscription);
 
-export default router;
+module.exports = router;

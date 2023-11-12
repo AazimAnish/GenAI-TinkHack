@@ -1,4 +1,4 @@
-import db from '../config/firebase.js';
+const db = require('../config/firebase.js');
 
 const createUser = async (req, res) => {
     try {
@@ -69,7 +69,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
-export {
+module.exports = {
     createUser,
     getAllUsers,
     getUserById,

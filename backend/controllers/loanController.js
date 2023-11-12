@@ -1,4 +1,4 @@
-import db from '../config/firebase.js';
+const db = require('../config/firebase.js');
 
 const createLoan = async (req, res) => {
     try {
@@ -81,7 +81,7 @@ const getLoanById = async (req, res) => {
     }
 };
 
-export {
+module.exports = {
     createLoan,
     updateLoan,
     getAllLoans,

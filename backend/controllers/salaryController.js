@@ -1,12 +1,11 @@
-import db from '../config/firebase.js';
+const db = require('../config/firebase.js');
 
-const createSalary = async (req,res) =>{
-    try{
-        const {amount} = req.body;
-        const response = await db.collection('salary').add({amount})
-        res.send(response)
-
-    }catch(error){
+const createSalary = async (req, res) => {
+    try {
+        const { amount } = req.body;
+        const response = await db.collection('salary').add({ amount });
+        res.send(response);
+    } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
@@ -22,13 +21,13 @@ const updateSalary = async (req, res) => {
         }
 
         // Check if the salary document exists
-        const salaryDoc = await db.collection("salary").doc(id).get();
+        const salaryDoc = await db.collection('salary').doc(id).get();
         if (!salaryDoc.exists) {
             return res.status(404).json({ error: 'Salary document not found' });
         }
 
         // Update the salary document
-        const salaryRef = await db.collection("salary").doc(id).update({
+        const salaryRef = await db.collection('salary').doc(id).update({
             amount: newAmount,
         });
 
@@ -39,8 +38,7 @@ const updateSalary = async (req, res) => {
     }
 };
 
-export {
+module.exports = {
     createSalary,
     updateSalary,
-
-}
+};

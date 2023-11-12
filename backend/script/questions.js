@@ -1,7 +1,6 @@
-import OpenAI from "openai";
-import fs from 'fs';
+const OpenAI = require("openai");
+const fs = require('fs');
 
-// Replace 'your_actual_api_key' with your OpenAI API key
 const apiKey = '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';
 const fileContent = fs.readFileSync('./kill.txt', 'utf-8');
 
@@ -42,7 +41,7 @@ async function generateBillTotalAndPurpose(billText) {
 // Example usage:
 const billText = `
 ${fileContent}
-give the response in a strict and straight to the point way and not too big... also the response should be in a very cautious and money saving manner
+give the response in a strict and straight to the point way and not too big... also the response should be in a very cautious and money-saving manner
 `;
 
 try {
